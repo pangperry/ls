@@ -1,11 +1,11 @@
 # calculator.rb
 
 require 'yaml'
-LANGUAGE = 'en'
+LANGUAGE = 'en'.freeze
 
 MESSAGES = YAML.load_file('calculator_messages.yml')
 
-def messages(message, lang = 'cn')
+def messages(message, lang = LANGUAGE)
   MESSAGES[lang][message]
 end
 
