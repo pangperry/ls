@@ -1,9 +1,11 @@
 # calculator.rb
 
 require 'yaml'
+LANGUAGE = 'en'
+
 MESSAGES = YAML.load_file('calculator_messages.yml')
 
-def messages(message, lang = 'en')
+def messages(message, lang = 'cn')
   MESSAGES[lang][message]
 end
 
@@ -36,30 +38,29 @@ def operation_to_message(op) # see prob 4
   end
 end
 
-prompt(messages('welcome'))
-
+prompt(messages('welcome', LANGUAGE))
 name = ''
 loop do
   name = gets.chomp
   break unless name.empty?
-  prompt(messages('valid_name'))
+  prompt(messages('valid_name', LANGUAGE))
 end
 
 loop do # main loop
   num_1 = ''
   loop do
-    prompt(messages('first_number'))
+    prompt(messages('first_number', LANGUAGE))
     num_1 = gets.chomp
     break if valid_number?(num_1)
-    prompt(messages('invalid_number'))
+    prompt(messages('invalid_number', LANGUAGE))
   end
 
   num_2 = ''
   loop do
-    prompt(messages('second_number'))
+    prompt(messages('second_number', LANGUAGE))
     num_2 = gets.chomp
     break if valid_number?(num_2)
-    prompt(messages('invalid_number'))
+    prompt(messages('invalid_number', LANGUAGE))
   end
 
   operator_prompt = <<-MSG
@@ -95,9 +96,9 @@ loop do # main loop
 
   prompt("The result is #{result}")
 
-  prompt(messages('another_calculation'))
+  prompt(messages('another_calculation', LANGUAGE))
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
-prompt(messages('good_bye'))
+prompt(messages('good_bye', LANGUAGE))
