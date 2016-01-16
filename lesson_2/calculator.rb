@@ -1,15 +1,29 @@
 # calculator.rb
-# used case instead of conditional if/then
+
+require 'yaml'
+MESSAGES = YAML.load_file('calculator_messages.yml')
+
+def messages(message, lang='en')
+  MESSAGES[lang][message]
+end
 
 def prompt(message)
   puts "=> #{message}"
 end
 
 def valid_number?(num)
-  num.to_i != 0
+  integer?(num) || float?(num)
 end
 
-def operation_to_message(op)
+def integer?(num)
+  /^\d+$/.match(num)
+end
+
+def float?(num)
+  /\d/.match(num) && /^\d*\.?\d*$/.match(num)
+end
+
+def operation_to_message(op) # see prob 4
   case op
   when '1'
     'Adding'
@@ -22,30 +36,30 @@ def operation_to_message(op)
   end
 end
 
-prompt("Welcome to Calculator! Enter your name:")
+prompt(messages('welcome'))
 
 name = ''
 loop do
   name = gets.chomp
   break unless name.empty?
-  prompt("Make sure to use a valid name.")
+  prompt(messages('valid_name'))
 end
 
 loop do # main loop
   num_1 = ''
   loop do
-    prompt("what's the first number?")
+    prompt(messages('first_number'))
     num_1 = gets.chomp
     break if valid_number?(num_1)
-    prompt("Hmm...that doesn't look like a valid number")
+    prompt(messages('invalid_number'))
   end
 
   num_2 = ''
   loop do
-    prompt("what's the second number?")
+    prompt(messages('second_number'))
     num_2 = gets.chomp
     break if valid_number?(num_2)
-    prompt("Hmm...that doesn't look like a valid number")
+    prompt(messages('invalid_number'))
   end
 
   operator_prompt = <<-MSG
@@ -81,9 +95,9 @@ loop do # main loop
 
   prompt("The result is #{result}")
 
-  prompt("Do you want to perform another calculation? (Y to calculate again)")
+  prompt(messages('another_calculation'))
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
-prompt("Thank you for using the calculator. Goodbye!")
+prompt(messages('good_bye'))
