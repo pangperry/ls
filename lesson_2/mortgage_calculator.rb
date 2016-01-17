@@ -63,7 +63,7 @@ loop do
   prompt("Your monthly payment on a #{loan_duration} year, #{apr}% loan is $ #{monthly_payment}")
 
   prompt("would you like to calculate another monthly mortgage payment?")
-  break if gets.chomp.downcase == 'y'
+  break if gets.chomp.downcase == 'n'
 end
 
 prompt('Thank you for using Mortgage Calcualator.')
