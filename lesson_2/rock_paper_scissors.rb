@@ -4,17 +4,37 @@ def prompt(message)
   puts("=> #{message}")
 end
 
-def win?(first, second)
+def rock_wins?(first, second)
   first == 'rock' && second == 'scissors' ||
-  first == 'rock' && second == 'lizard' ||
-    first == 'paper' && second == 'rock' ||
-    first == 'paper' && second == 'spock' ||
-    first == 'scissors' && second == 'paper' ||
-    first == 'scissors' && second == 'lizard' ||
-    first == 'spock' && second == 'rock' ||
-    first == 'spock' && second == 'scissors' ||
-    first == 'lizard' && second == 'spock' ||
+    first == 'rock' && second == 'lizard'
+end
+
+def paper_wins?(first, second)
+  first == 'paper' && second == 'rock' ||
+    first == 'paper' && second == 'spock'
+end
+
+def scissors_wins?(first, second)
+  first == 'scissors' && second == 'paper' ||
+    first == 'scissors' && second == 'lizard'
+end
+
+def spock_wins?(first, second)
+  first == 'spock' && second == 'rock' ||
+    first == 'spock' && second == 'scissors'
+end
+
+def lizard_wins?(first, second)
+  first == 'lizard' && second == 'spock' ||
     first == 'lizard' && second == 'paper'
+end
+
+def win?(first, second)
+  rock_wins?(first, second) ||
+    paper_wins?(first, second) ||
+    scissors_wins?(first, second) ||
+    spock_wins?(first, second) ||
+    lizard_wins?(first, second)
 end
 
 def display_results(player, computer)
