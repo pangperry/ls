@@ -1,5 +1,8 @@
 VALID_CHOICES = %w(rock paper scissors lizard spock).freeze
 
+@player_wins = 0
+@computer_wins = 0
+
 def prompt(message)
   puts("=> #{message}")
 end
@@ -40,12 +43,16 @@ end
 def display_results(player, computer)
   if win?(player, computer)
     prompt("You won!")
+    @player_wins += 1
   elsif win?(computer, player)
     prompt("Computer won!")
+    @computer_wins += 1
   else
     prompt("It's a tie!")
   end
 end
+
+prompt("Welcome to rock, paper, scissors, lizard spock!")
 
 loop do
   choice = ''
@@ -62,6 +69,9 @@ loop do
   prompt("You chose: #{choice}; Computer chose: #{computer_choice}")
 
   display_results(choice, computer_choice)
+
+  puts "Player wins: #{@player_wins}"
+  puts "Computer wins: #{@computer_wins}"
 
   prompt("Do you want to play again?")
   answer = gets.chomp
