@@ -52,14 +52,30 @@ def display_results(player, computer)
   end
 end
 
+def check_input(user_input)
+  case user_input
+  when "r", "ro"
+    "rock"
+  when "p", "pa"
+    "paper"
+  when "sc"
+    "scissors"
+  when "sp"
+    "spock"
+  else
+    user_input
+  end
+end
+
 prompt("Welcome to rock, paper, scissors, lizard spock!")
 
 loop do
   choice = ''
+  input = ''
   loop do
     prompt("Choose one: #{VALID_CHOICES.join(', ')}")
-    choice = gets.chomp
-
+    input = gets.chomp
+    choice = check_input(input)
     break if VALID_CHOICES.include?(choice)
     prompt("That's not a valid choice.")
   end
