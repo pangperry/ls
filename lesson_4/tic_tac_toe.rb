@@ -50,16 +50,10 @@ def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
-def joinor(arr, punctuation = ', ', conjunction = 'or ')
-  arr.join(punctuation).insert(-2, conjunction)
+def joinor(arr, delimiter = ', ', conjunction = 'or ')
+  arr.join(delimiter).insert(-2, conjunction)
 end
-# other possible solution:
-=begin
-def joinor(arr, delimiter, word='or')
-    arr[-1] = "#{word} #{arr.last}" if arr.size > 1
-      arr.join(delimiter)
-end
-=end
+
 def detect_square_winner(brd)
   detect_squares(brd, COMPUTER_MARKER)
 end
@@ -86,7 +80,6 @@ end
 def player_places_piece!(brd)
   square = ''
   loop do
-    # prompt "Choose a position to place the peace: #{empty_squares(brd).join(', ')}"
     prompt "Choose a position to place the peace: #{joinor(empty_squares(brd), '; ')}"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
@@ -98,8 +91,6 @@ end
 
 def computer_places_piece!(brd)
   square =
-   # if detect_threat(brd)
-   #   detect_threat(brd)
   if detect_square_winner(brd)
     detect_square_winner(brd)
   elsif detect_square_threat(brd)
@@ -130,22 +121,11 @@ end
 # rubocop: disable Metrics/MethodLength
 def detect_winner(brd)
   WINNING_LINES.each do |line|
-=begin
-    if brd[line[0]] == PLAYER_MARKER &&
-       brd[line[1]] == PLAYER_MARKER &&
-       brd[line[2]] == PLAYER_MARKER
-      return 'Player'
-    elsif brd[line[0]] == COMPUTER_MARKER &&
-          brd[line[1]] == COMPUTER_MARKER &&
-          brd[line[2]] == COMPUTER_MARKER
-      return 'Computer'
-    end
     if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 3
       return 'Player'
     elsif brd.values_at(line[0], line[1], line[2]).count(COMPUTER_MARKER) == 3
       return 'Computer'
     end
-=end
     if brd.values_at(*line).count(PLAYER_MARKER) == 3
       return 'Player'
     elsif brd.values_at(*line).count(COMPUTER_MARKER) == 3
