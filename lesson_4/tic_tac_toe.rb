@@ -12,7 +12,7 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
-# rubocop: disable Metrics/AbcSize
+# rubocop:disable Metrics/AbcSize
 def display_board(brd)
   system 'clear'
   puts "You're an #{PLAYER_MARKER}"
@@ -30,7 +30,7 @@ def display_board(brd)
   puts "     |     |"
   puts ""
 end
-# rubocop: enable Metrics/AbcSize
+# rubocop:enable Metrics/AbcSize
 
 def initialize_player_score
   @player_score = 0
@@ -76,6 +76,14 @@ def detect_squares(brd, type)
   nil
 end
 
+def place_piece!(brd, current_player)
+  if current_player == "Computer"
+    computer_places_piece!(brd)
+  else
+    player_places_piece!(brd)
+  end
+end
+
 def player_places_piece!(brd)
   square = ''
   loop do
@@ -101,6 +109,10 @@ def computer_places_piece!(brd)
   brd[square] = COMPUTER_MARKER
 end
 
+def alternate_player(player)
+  player == 'Player' ? 'Computer' : 'Player'
+end
+
 def board_full?(brd)
   empty_squares(brd).empty?
 end
@@ -117,7 +129,7 @@ def win_five?(score)
   score == 5
 end
 
-# rubocop: disable Metrics/AbcSize
+# rubocop:disable Metrics/AbcSize
 def detect_winner(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 3
@@ -133,20 +145,19 @@ def detect_winner(brd)
   end
   nil
 end
-# rubocop: enable Metrics/AbcSize
+# rubocop:enable Metrics/AbcSize
 
 initialize_player_score
 initialize_computer_score
 
 loop do
   board = initialize_board
+  current_player = "Player"
 
   loop do
     display_board(board)
-    player_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
-    computer_places_piece!(board)
-    display_board(board)
+    place_piece!(board, current_player)
+    current_player = alternate_player(current_player)
     break if someone_won?(board) || board_full?(board)
   end
 
