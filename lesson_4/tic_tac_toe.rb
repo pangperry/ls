@@ -76,7 +76,6 @@ def detect_squares(brd, type)
   nil
 end
 
-
 def player_places_piece!(brd)
   square = ''
   loop do
@@ -91,13 +90,13 @@ end
 
 def computer_places_piece!(brd)
   square =
-  if detect_square_winner(brd)
-    detect_square_winner(brd)
-  elsif detect_square_threat(brd)
-    detect_square_threat(brd)
-  else
-    empty_squares(brd).sample
-  end
+    if detect_square_winner(brd)
+      detect_square_winner(brd)
+    elsif detect_square_threat(brd)
+      detect_square_threat(brd)
+    else
+      empty_squares(brd).sample
+    end
 
   brd[square] = COMPUTER_MARKER
 end
@@ -118,7 +117,7 @@ def win_five?(score)
   score == 5
 end
 
-# rubocop: disable Metrics/MethodLength
+# rubocop: disable Metrics/AbcSize
 def detect_winner(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(line[0], line[1], line[2]).count(PLAYER_MARKER) == 3
@@ -134,7 +133,7 @@ def detect_winner(brd)
   end
   nil
 end
-# rubocop: enable Metrics/MethodLength
+# rubocop: enable Metrics/AbcSize
 
 initialize_player_score
 initialize_computer_score
