@@ -64,7 +64,7 @@ end
 def detect_threat(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(*line).count(PLAYER_MARKER) == 2 &&
-       rd.values_at(*line).count(INITIAL_MARKER) == 1
+       brd.values_at(*line).count(INITIAL_MARKER) == 1
 
       square = line.find { |num| brd[num] == INITIAL_MARKER }
       return square
