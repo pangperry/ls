@@ -60,10 +60,17 @@ def joinor(arr, delimiter, word='or')
       arr.join(delimiter)
 end
 =end
+def detect_square_winner(brd)
+  detect_squares(brd, COMPUTER_MARKER)
+end
 
-def detect_threat(brd)
+def detect_square_threat(brd)
+  detect_squares(brd, PLAYER_MARKER)
+end
+
+def detect_squares(brd, type)
   WINNING_LINES.each do |line|
-    if brd.values_at(*line).count(PLAYER_MARKER) == 2 &&
+    if brd.values_at(*line).count(type) == 2 &&
        brd.values_at(*line).count(INITIAL_MARKER) == 1
 
       square = line.find { |num| brd[num] == INITIAL_MARKER }
@@ -74,6 +81,7 @@ def detect_threat(brd)
   end
   nil
 end
+
 
 def player_places_piece!(brd)
   square = ''
@@ -90,11 +98,15 @@ end
 
 def computer_places_piece!(brd)
   square =
-    if detect_threat(brd)
-      detect_threat(brd)
-    else
-      empty_squares(brd).sample
-    end
+   # if detect_threat(brd)
+   #   detect_threat(brd)
+  if detect_square_winner(brd)
+    detect_square_winner(brd)
+  elsif detect_square_threat(brd)
+    detect_square_threat(brd)
+  else
+    empty_squares(brd).sample
+  end
 
   brd[square] = COMPUTER_MARKER
 end
