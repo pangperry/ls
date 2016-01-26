@@ -28,7 +28,7 @@ end
 def results(player_score, computer_score)
   result = case
            when player_score > 21 && computer_score > 21
-             "you both busted!"
+             "you both busted! It's a tie!"
            when player_score > 21
              "you busted! dealer wins!"
            when computer_score > 21
@@ -41,6 +41,15 @@ def results(player_score, computer_score)
              "you lost!"
            end
   prompt result
+end
+
+def player_bust?(score, hand)
+  if score > 21 && hand.count("Ace") == 0
+    prompt "#{hand} for a score of #{score}...you busted!"
+    true
+  elsif score > 21
+    false
+  end
 end
 
 def adjust_for_aces(hand)
@@ -57,6 +66,8 @@ def adjust_for_aces(hand)
 end
 
 loop do
+  system 'clear'
+  prompt "Welcome to Twenty-One!".upcase
   deck = initialize_deck
 
   player_hand = []
@@ -71,22 +82,24 @@ loop do
   loop do
     player_score = score(player_hand)
 
-    if player_score > 21 && player_hand.count("Ace") == 0
-      prompt "#{player_hand} for a score of #{player_score}...you busted!"
-    elsif player_score > 21
-      player_score =
-        adjust_for_aces(player_hand)
+    unless player_score <= 21
+      bust = player_bust?(player_score, player_hand)
     end
 
-    break if player_score > 21
+    break if bust
 
-    prompt "Your hand is  #{player_hand}, for a score of #{player_score}"
+    adjust_for_aces(player_hand) if player_score > 21
+
+    puts
+    prompt "Your hand is  #{player_hand}"
+    puts
     prompt "Dealer is showing one #{computer_hand.first}"
 
-    prompt "Do you Hit or Stay?"
+    prompt "Do you (H)it or (S)tay?"
     action = gets.chomp
     break unless action.downcase.start_with?("h")
 
+    prompt "You chose to hit"
     deal_card(player_hand, deck)
   end
 
@@ -101,7 +114,7 @@ loop do
     deal_card(computer_hand, deck)
   end
 
-  prompt results(player_score, computer_score)
+  results(player_score, computer_score)
   prompt "Play again?(y or n)"
   break unless gets.chomp == "y"
 end
