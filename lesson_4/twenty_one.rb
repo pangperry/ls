@@ -25,12 +25,10 @@ def score(hand)
   hand_score.inject(:+)
 end
 
-def results(player_score, computer_score)
+def display_results(player_score, computer_score)
   result = case
-           when player_score > 21 && computer_score > 21
-             "you both busted! It's a tie!"
            when player_score > 21
-             "you busted! dealer wins!"
+             "you busted. dealer wins!"
            when computer_score > 21
              "dealer busted. you won!"
            when player_score > computer_score
@@ -47,7 +45,7 @@ def bust?(score, hand)
   ace_adjustment = hand.count("Ace") * 10
   adjusted_score = score - ace_adjustment
 
-  if  adjusted_score > 21
+  if adjusted_score > 21
     true
   else
     false
@@ -118,7 +116,6 @@ loop do
       computer_score = adjust_for_aces(computer_hand)
     end
 
-
     unless computer_score <= 21
       bust = bust?(computer_score, computer_hand)
     end
@@ -132,8 +129,10 @@ loop do
   end
 
   puts
-
-  prompt results(player_score, computer_score)
+  prompt "------------------------"
+  prompt display_results(player_score, computer_score)
+  prompt "------------------------"
+  puts
   prompt "Play again?(y or n)"
   break unless gets.chomp == "y"
 end
