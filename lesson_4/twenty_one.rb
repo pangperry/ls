@@ -40,14 +40,16 @@ def results(player_score, computer_score)
            else
              "you lost!"
            end
-  prompt result
+  result
 end
 
-def player_bust?(score, hand)
-  if score > 21 && hand.count("Ace") == 0
-    prompt "#{hand} for a score of #{score}...you busted!"
+def bust?(score, hand)
+  ace_adjustment = hand.count("Ace") * 10
+  adjusted_score = score - ace_adjustment
+
+  if  adjusted_score > 21
     true
-  elsif score > 21
+  else
     false
   end
 end
@@ -81,25 +83,25 @@ loop do
 
   loop do
     player_score = score(player_hand)
+    bust = bust?(player_score, player_hand)
 
-    unless player_score <= 21
-      bust = player_bust?(player_score, player_hand)
+    if bust
+      prompt "#{player_hand}...You bust!"
+      break
+    else
+      player_score = adjust_for_aces(player_hand)
     end
 
-    break if bust
-
-    adjust_for_aces(player_hand) if player_score > 21
-
     puts
-    prompt "Your hand is  #{player_hand}"
+    prompt "Your hand is  #{player_hand}, for #{player_score}"
     puts
     prompt "Dealer is showing one #{computer_hand.first}"
-
+    puts
     prompt "Do you (H)it or (S)tay?"
     action = gets.chomp
     break unless action.downcase.start_with?("h")
-
     prompt "You chose to hit"
+
     deal_card(player_hand, deck)
   end
 
@@ -107,14 +109,31 @@ loop do
 
   loop do
     computer_score = score(computer_hand)
-    prompt "Dealer is showing #{computer_hand} for #{computer_score}"
+    bust = bust?(computer_score, computer_hand)
 
+    if bust
+      prompt "#{computer_hand}...Computer busts"
+      break
+    else
+      computer_score = adjust_for_aces(computer_hand)
+    end
+
+
+    unless computer_score <= 21
+      bust = bust?(computer_score, computer_hand)
+    end
+    break if bust
+
+    prompt "Dealer is showing #{computer_hand} for #{computer_score}"
+    puts
     break if computer_score >= 17
     prompt "Dealer hits."
     deal_card(computer_hand, deck)
   end
 
-  results(player_score, computer_score)
+  puts
+
+  prompt results(player_score, computer_score)
   prompt "Play again?(y or n)"
   break unless gets.chomp == "y"
 end
