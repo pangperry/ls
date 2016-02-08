@@ -78,11 +78,12 @@ end
 
 # Game Orchestration Engine
 class Game
-  attr_accessor :human, :computer
+  attr_accessor :human, :computer, :score
 
   def initialize
     @human = Human.new
     @computer = Computer.new
+    @score = {human: 0, computer: 0}
   end
 
   def display_welcome_message
@@ -90,7 +91,7 @@ class Game
   end
 
   def display_goodbye_message
-    puts "Thanks for palying Rock, Paper, Scissors! Goodbye!"
+    puts "Thanks for playing Rock, Paper, Scissors! Goodbye!"
   end
 
   def display_moves
@@ -101,11 +102,21 @@ class Game
   def display_winner
     if human.move > computer.move
       puts "#{human.name} won!"
+      score[:human] += 1
     elsif human.move < computer.move
       puts "#{computer.name} won!"
+      score[:computer] += 1
     else
       puts "It's a tie!"
     end
+  end
+
+  def display_score
+    puts "The score is #{human.name}: #{score[:human]} to #{computer.name}: #{score[:computer]}"
+  end
+
+  def game_over?
+    (score[:human] >= 4) || (score[:computer] >= 4)
   end
 
   def play_again?
@@ -128,6 +139,8 @@ class Game
       computer.choose
       display_moves
       display_winner
+      display_score
+      break if game_over?
       break unless play_again?
     end
     display_goodbye_message
