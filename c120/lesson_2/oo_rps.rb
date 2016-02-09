@@ -16,7 +16,7 @@ class Score
 end
 
 class Move
-  VALUES = ['rock', 'paper', 'scissors'].freeze
+  VALUES = ['rock', 'paper', 'scissors', 'lizard', 'spock'].freeze
 
   def initialize(value)
     @value = value
@@ -34,16 +34,68 @@ class Move
     @value == 'paper'
   end
 
+  def lizard?
+    @value == 'lizard'
+  end
+
+  def spock?
+    @value == 'spock'
+  end
+
+  def rock_wins?(other_move)
+    rock? && (other_move.scissors? || other_move.lizard?)
+  end
+
+  def paper_wins?(other_move)
+    paper? && (other_move.rock? || other_move.spock?)
+  end
+
+  def scissors_wins?(other_move)
+    scissors? && (other_move.paper? || other_move.lizard?)
+  end
+
+  def lizard_wins?(other_move)
+    lizard? && (other_move.spock? || other_move.paper?)
+  end
+
+  def spock_wins?(other_move)
+    spock? && (other_move.rock? || other_move.scissors?)
+  end
+
+  def rock_loses?(other_move)
+    rock? && (other_move.spock? || other_move.paper?)
+  end
+
+  def paper_loses?(other_move)
+    paper? && (other_move.lizard? || other_move.scissors?)
+  end
+
+  def scissors_loses?(other_move)
+    scissors? && (other_move.rock? || other_move.spock?)
+  end
+
+  def lizard_loses?(other_move)
+    lizard? && (other_move.scissors? || other_move.rock?)
+  end
+
+  def spock_loses?(other_move)
+    spock? && (other_move.lizard? || other_move.paper?)
+  end
+
   def >(other_move)
-    (rock?     && other_move.scissors?) ||
-      (paper?    && other_move.rock?)   ||
-      (scissors? && other_move.paper?)
+    rock_wins?(other_move) ||
+      paper_wins?(other_move) ||
+      scissors_wins?(other_move) ||
+      lizard_wins?(other_move) ||
+      spock_wins?(other_move)
   end
 
   def <(other_move)
-    (rock?     && other_move.paper?)      ||
-      (paper?    && other_move.scissors?) ||
-      (scissors? && other_move.rock?)
+    rock_loses?(other_move) ||
+      paper_loses?(other_move) ||
+      scissors_loses?(other_move) ||
+      lizard_loses?(other_move) ||
+      spock_loses?(other_move)
   end
 
   def to_s
@@ -74,7 +126,7 @@ class Human < Player
   def choose
     choice = nil
     loop do
-      puts "Please choose rock, paper, or scissors:"
+      puts "Please choose rock, paper, scissors, lizard, or spock:"
       choice = gets.chomp
       break if Move::VALUES.include? choice
       puts "Sorry, invalid choice."
