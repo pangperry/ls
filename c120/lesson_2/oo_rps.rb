@@ -1,3 +1,20 @@
+class Score
+  attr_accessor :human, :computer
+
+  def initialize
+    @human = 0
+    @computer = 0
+  end
+
+  def point_human
+    self.human += 1
+  end
+
+  def point_computer
+    self.computer += 1
+  end
+end
+
 class Move
   VALUES = ['rock', 'paper', 'scissors'].freeze
 
@@ -35,7 +52,7 @@ class Move
 end
 
 class Player
-  attr_accessor :move, :name
+  attr_accessor :move, :name, :score
 
   def initialize
     set_name
@@ -83,7 +100,7 @@ class Game
   def initialize
     @human = Human.new
     @computer = Computer.new
-    @score = {human: 0, computer: 0}
+    @score = Score.new
   end
 
   def display_welcome_message
@@ -99,24 +116,32 @@ class Game
     puts "#{computer.name} chose #{computer.move}"
   end
 
-  def display_winner
+  def winner
     if human.move > computer.move
-      puts "#{human.name} won!"
-      score[:human] += 1
+      return "human"
     elsif human.move < computer.move
+      return "computer"
+    end
+  end
+
+  def display_winner
+    if winner == "human"
+      puts "#{human.name} won!"
+      score.point_human
+    elsif winner == "computer"
       puts "#{computer.name} won!"
-      score[:computer] += 1
+      score.point_computer
     else
       puts "It's a tie!"
     end
   end
 
   def display_score
-    puts "The score is #{human.name}: #{score[:human]} to #{computer.name}: #{score[:computer]}"
+    puts "The score is #{human.name}: #{score.human} to #{computer.name}: #{score.computer}"
   end
 
   def game_over?
-    (score[:human] >= 4) || (score[:computer] >= 4)
+    (score.human > 3) || (score.computer > 3)
   end
 
   def play_again?
