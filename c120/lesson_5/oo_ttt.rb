@@ -30,7 +30,6 @@ class Board
   def winning_marker
     WINNING_LINES.each do |line|
       squares = @squares.values_at(*line)
-      binding.pry
       if three_identical_markers?(squares)
         return squares.first.marker
       end
@@ -44,18 +43,11 @@ class Board
 
   def detect_at_risk_square
     WINNING_LINES.each do |line|
-      if @squares[line[0]].marker == TTTGame::HUMAN_MARKER &&
-          @squares[line[1]].marker == TTTGame::HUMAN_MARKER &&
-          @squares[line[2]].unmarked?
-        return line[2]
-      elsif @squares[line[0]].marker == TTTGame::HUMAN_MARKER &&
-        @squares[line[1]].unmarked? &&
-        @squares[line[2]].marker == TTTGame::HUMAN_MARKER
-        return line[1]
-      elsif @squares[line[0]].unmarked? &&
-        @squares[line[1]].marker == TTTGame::HUMAN_MARKER &&
-        @squares[line[2]].marker == TTTGame::HUMAN_MARKER
-        return line[0]
+      squares = @squares.values_at(*line)
+      unmarked = squares.select(&:unmarked?)
+      marked = squares.select { |square| square.marker == TTTGame::HUMAN_MARKER }
+      if marked.count == 2 && unmarked.count == 1
+         return @squares.select { |k,v| line.include?(k) && v.marker == Square::INITIAL_MARKER}.keys.first
       end
     end
     nil
