@@ -37,17 +37,17 @@ class Board
     nil
   end
 
-  def at_risk_square?
-    !!detect_at_risk_square
+  def at_risk_square?(marker)
+    !!detect_at_risk_square(marker)
   end
 
-  def detect_at_risk_square
+  def detect_at_risk_square(marker)
     WINNING_LINES.each do |line|
       squares = @squares.values_at(*line)
       unmarked = squares.select(&:unmarked?)
-      marked = squares.select { |square| square.marker == TTTGame::HUMAN_MARKER }
+      marked = squares.select { |square| square.marker == marker }
       if marked.count == 2 && unmarked.count == 1
-         return @squares.select { |k,v| line.include?(k) && v.marker == Square::INITIAL_MARKER}.keys.first
+        return @squares.select { |k, v| line.include?(k) && v.marker == Square::INITIAL_MARKER }.keys.first
       end
     end
     nil
@@ -104,31 +104,63 @@ class Square
 end
 
 class Player
-  attr_reader :marker
+  VALID_MARKERS = ['X', 'O'].freeze
+  attr_reader :marker, :name
   attr_accessor :score
 
-  def initialize(marker)
-    @marker = marker
+  def initialize
+    @name = ''
+    @marker = ''
     @score = 0
+  end
+
+  def set_name
+    name = ''
+
+    puts "Please enter your name:"
+    loop do
+      name = gets.chomp
+      break unless name.empty?
+    end
+
+    @name = name
+  end
+
+  def choose_marker
+    marker = ''
+    puts "please choose a marker"
+    loop do
+      marker = gets.chomp
+      break if VALID_MARKERS.include?(marker)
+      puts "Please enter a valid marker"
+    end
+    @marker = marker
+  end
+end
+
+class Computer < Player
+  def set_name
+    @name = ['HAL', 'Maximilian', 'Sonny'].sample
+  end
+
+  def choose_marker(other_marker)
+    @marker = VALID_MARKERS.reject { |computer_marker| computer_marker == other_marker }.first
   end
 end
 
 class TTTGame
-  HUMAN_MARKER = "X".freeze
-  COMPUTER_MARKER = "O".freeze
-  FIRST_TO_MOVE = HUMAN_MARKER
-
   attr_reader :board, :human, :computer
 
   def initialize
+    clear
     @board = Board.new
-    @human = Player.new(HUMAN_MARKER)
-    @computer = Player.new(COMPUTER_MARKER)
-    @current_marker = FIRST_TO_MOVE
+    @human = Player.new
+    @computer = Computer.new
+    @current_marker = nil
   end
 
   def play
-    display_welcome_message
+    setup_game
 
     loop do
       display_board
@@ -149,25 +181,47 @@ class TTTGame
 
   private
 
+  def setup_game
+    display_welcome_message
+    human.set_name
+    computer.set_name
+    human.choose_marker
+    computer.choose_marker(human.marker)
+    who_plays_first
+  end
+
   def display_welcome_message
     puts "Welcome to Tic Tac Toe!"
     puts ""
   end
 
+  def who_plays_first
+    puts "Do you want to go first? (y/n)"
+    answer = ''
+
+    loop do
+      answer = gets.chomp
+      break if answer.casecmp('y') == 0 || answer.casecmp('n') == 0
+    end
+
+    @current_marker =
+      answer.casecmp('y') == 0 ? human.marker : computer.marker
+  end
+
   def display_board
-    puts "You're #{human.marker}. Computer is #{computer.marker}"
+    puts "#{human.name} is #{human.marker}. #{computer.name} is #{computer.marker}"
     puts ""
     board.draw
     puts ""
   end
 
   def current_player_moves
-    if @current_marker == HUMAN_MARKER
+    if @current_marker == human.marker
       human_moves
-      @current_marker = COMPUTER_MARKER
+      @current_marker = computer.marker
     else
       computer_moves
-      @current_marker = HUMAN_MARKER
+      @current_marker = human.marker
     end
   end
 
@@ -189,14 +243,9 @@ class TTTGame
   end
 
   def computer_moves
-    square = nil
-    if board.at_risk_square?
-      square = board.detect_at_risk_square
-    else
-      square = board.unmarked_keys.sample
-    end
+    square = board.detect_at_risk_square(human.marker)
+    square = board.unmarked_keys.sample unless square
     board[square] = computer.marker
-    #board[board.unmarked_keys.sample] = computer.marker
   end
 
   def display_play_again_message
