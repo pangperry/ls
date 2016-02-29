@@ -17,7 +17,7 @@ def initialize_deck(shoe_size = 1)
 end
 
 def deal_card(hand, deck)
-  hand << deck.pop
+  deck.pop
 end
 
 def score(hand)
