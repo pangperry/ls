@@ -62,18 +62,17 @@ class TodoList
   end
 
   def item_at(location)
-    fail(IndexError) if location > todos.size
-    todos.at(location)
+    todos.fetch(location)
   end
 
   def mark_done_at(location)
     fail(IndexError) if location > todos.size
-    todos.at(location).done!
+    item_at(location).done!
   end
 
   def mark_undone_at(location) # refactor these
     fail(IndexError) if location > todos.size
-    todos.at(location).undone!
+    item_at(location).undone!
   end
 
   def shift
