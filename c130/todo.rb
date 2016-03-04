@@ -43,13 +43,11 @@ class TodoList
   end
 
   def <<(todo)
-    add(todo)
-  end
-
-  def add(todo)
     fail(TypeError, "Can only add Todo objects") unless todo.is_a?(Todo)
+
     @todos << todo
   end
+  alias_method :add, :<<
 
   def size
     todos.size
@@ -100,7 +98,7 @@ class TodoList
   end
 end
 
-=begin
+#=begin
 # given
 todo1 = Todo.new("Buy milk")
 todo2 = Todo.new("Clean room")
@@ -177,4 +175,4 @@ list.to_s                      # returns string representation of the list
 # # [ ] Buy milk
 # # [X] Clean room
 # # [ ] Go to gym
-=end
+#=end
