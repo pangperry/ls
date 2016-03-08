@@ -1,9 +1,8 @@
 class SecretHandshake
-  #LIST = { 1=> 'wink', 10=> 'double blink', 100=> 'close your eyes', 1000 => 'jump'}.freeze
   LIST = ['reverse', 'jump', 'close your eyes', 'double blink', 'wink']
 
-  def initialize(number)
-    @binary = number.to_s(2)#need to deal with invalid numbers here.
+  def initialize(input)
+    @binary = convert(input)
   end
 
   def commands
@@ -13,27 +12,34 @@ class SecretHandshake
       handshake.unshift(LIST[place]) if @binary[place] == '1'
       place += 1
     end
+
     if handshake.include?('reverse')
       handshake.delete('reverse')
       handshake.reverse!
     end
+
     handshake
   end
 
+  def convert(number)
+    if valid?(number)
+      number.to_s(2)
+    elsif valid_binary?(number)
+      number
+    else
+      0
+    end
+  end
 
+  def valid?(number)
+    number.is_a?(Fixnum) && number < 32
+  end
+
+  def valid_binary?(str)
+    str.size < 6 && /(1|0){1,6}/.match(str)
+  end
 end
-=begin
 
-p SecretHandshake.new(1).commands
-p SecretHandshake.new(2).commands
-p SecretHandshake.new(4).commands
-p SecretHandshake.new(8).commands
-p SecretHandshake.new(3).commands
-p SecretHandshake.new(19).commands
-p SecretHandshake.new(31).commands
-p SecretHandshake.new(3).commands
-p SecretHandshake.new('piggies').commands
 
-#handshake = SecretHandshake.new "11001"
-#handshake.commands # => ["jump","wink"]
-=end
+
+
