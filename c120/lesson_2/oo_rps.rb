@@ -2,7 +2,7 @@ class Score
   attr_accessor :human, :computer
 
   def initialize
-    @human = 0
+    @player = 0
     @computer = 0
   end
 
@@ -22,24 +22,20 @@ class Move
     @value = value
   end
 
-  def scissors?
-    @value == 'scissors'
+  def >(other_move)
+    rock_wins?(other_move) ||
+      paper_wins?(other_move) ||
+      scissors_wins?(other_move) ||
+      lizard_wins?(other_move) ||
+      spock_wins?(other_move)
   end
 
-  def rock?
-    @value == 'rock'
-  end
-
-  def paper?
-    @value == 'paper'
-  end
-
-  def lizard?
-    @value == 'lizard'
-  end
-
-  def spock?
-    @value == 'spock'
+  def <(other_move)
+    rock_loses?(other_move) ||
+      paper_loses?(other_move) ||
+      scissors_loses?(other_move) ||
+      lizard_loses?(other_move) ||
+      spock_loses?(other_move)
   end
 
   def rock_wins?(other_move)
@@ -82,20 +78,24 @@ class Move
     spock? && (other_move.lizard? || other_move.paper?)
   end
 
-  def >(other_move)
-    rock_wins?(other_move) ||
-      paper_wins?(other_move) ||
-      scissors_wins?(other_move) ||
-      lizard_wins?(other_move) ||
-      spock_wins?(other_move)
+  def scissors?
+    @value == 'scissors'
   end
 
-  def <(other_move)
-    rock_loses?(other_move) ||
-      paper_loses?(other_move) ||
-      scissors_loses?(other_move) ||
-      lizard_loses?(other_move) ||
-      spock_loses?(other_move)
+  def rock?
+    @value == 'rock'
+  end
+
+  def paper?
+    @value == 'paper'
+  end
+
+  def lizard?
+    @value == 'lizard'
+  end
+
+  def spock?
+    @value == 'spock'
   end
 
   def to_s
