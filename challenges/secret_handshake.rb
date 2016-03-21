@@ -1,45 +1,61 @@
+# class converts binary numbers to a secret handshake
 class SecretHandshake
-  LIST = ['reverse', 'jump', 'close your eyes', 'double blink', 'wink']
+  LIST = ['reverse', 'jump', 'close your eyes', 'double blink', 'wink'].freeze
+
+  attr_reader :binary, :handshake
 
   def initialize(input)
-    @binary = convert(input)
+    @binary = Binary.new(input).convert
+    @handshake = []
   end
 
   def commands
-    place = - @binary.size
-    handshake = []
-    until place == 0
-      handshake.unshift(LIST[place]) if @binary[place] == '1'
-      place += 1
-    end
+    binary_to_commands
+  end
 
-    if handshake.include?('reverse')
-      handshake.delete('reverse')
-      handshake.reverse!
+  private
+
+  def binary_to_commands
+    index = - binary.size
+
+    until index == 0
+      handshake.unshift(LIST[index]) if binary[index] == '1'
+      index += 1
     end
+    reverse_handshake if handshake.include?('reverse')
 
     handshake
   end
 
-  def convert(number)
-    if valid?(number)
-      number.to_s(2)
-    elsif valid_binary?(number)
-      number
-    else
-      0
-    end
+  def reverse_handshake
+    handshake.delete('reverse')
+    handshake.reverse!
   end
 
-  def valid?(number)
-    number.is_a?(Fixnum) && number < 32
-  end
-
-  def valid_binary?(str)
-    str.size < 6 && /(1|0){1,6}/.match(str)
+  def reverse(handshake)
   end
 end
 
+# class converts a valid base 10 number to binary
+class Binary
+  attr_reader :number
 
+  def initialize(number)
+    @number = number
+  end
 
+  def convert
+    return valid_number if valid?(number)
+    0
+  end
 
+  private
+
+  def valid_number
+    number.to_s(2)
+  end
+
+  def valid?(input)
+    input.is_a?(Fixnum) && input < 32
+  end
+end

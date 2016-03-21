@@ -1,31 +1,32 @@
-require 'pry'
+# creates a robot object which can then "move" north, south east and west
+# from a given starting point
 class Robot
-  ORIENTATIONS = [:north, :west, :south, :east]
+  ORIENTATIONS = [:north, :west, :south, :east].freeze
   RIGHT = ORIENTATIONS
   LEFT = ORIENTATIONS.reverse
 
   attr_reader :bearing
 
   def orient(orientation)
-    raise ArgumentError unless ORIENTATIONS.include?(orientation)
+    fail ArgumentError unless ORIENTATIONS.include?(orientation)
     @bearing = orientation
   end
 
   def turn_right
-    @bearing =RIGHT[RIGHT.find_index(bearing)-1]
+    @bearing = RIGHT[RIGHT.find_index(bearing) - 1]
   end
 
   def turn_left
-    @bearing =LEFT[LEFT.find_index(bearing)-1]
+    @bearing = LEFT[LEFT.find_index(bearing) - 1]
   end
 
-  def at(x,y)
+  def at(x, y)
     @x = x
     @y = y
   end
 
   def coordinates
-    [@x,@y]
+    [@x, @y]
   end
 
   def advance
@@ -42,14 +43,16 @@ class Robot
   end
 end
 
+# simulator object can read grouped directional instructions and
+# correspondinly move objects of the Robot class
 class Simulator
-  COMMANDS = { 'L' => :turn_left, 'R' => :turn_right, 'A' => :advance }
+  COMMANDS = { 'L' => :turn_left, 'R' => :turn_right, 'A' => :advance }.freeze
 
   def instructions(string)
     string.chars.map { |letter| COMMANDS[letter] }
   end
 
-  def place(robot, x:, y:, direction:)
+  def place(robot, x: nil, y: nil, direction: nil)
     robot.at(x, y)
     robot.orient(direction)
   end
