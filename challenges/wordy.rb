@@ -1,4 +1,11 @@
 class WordProblem
+  OPERATORS = {
+    'minus' => '-',
+    'plus'  => '+',
+    'divided' => '/',
+    'multiplied' => '*',
+    }
+
   attr_reader :question
 
   def initialize(question)
@@ -36,20 +43,20 @@ class WordProblem
 
   def simple_operation
     operator = stripped[1]
-    a        = stripped[0]
-    b        = stripped[2]
+    a        = stripped[0].to_i
+    b        = stripped[2].to_i
     operation(operator, a, b)
   end
 
   def operation(operator, a, b)
-    send operator.to_sym, a, b
+    a.send OPERATORS[operator], b
   end
 
   def complex_operation
     counter  = 3
     total    = simple_operation
     operator = stripped[counter]
-    b        = stripped[counter + 1]
+    b        = stripped[counter + 1].to_i
 
     while counter < stripped.length
       total = operation(operator, total, b)
@@ -57,21 +64,5 @@ class WordProblem
     end
 
     total
-  end
-
-  def plus(a, b)
-    a.to_i + b.to_i
-  end
-
-  def minus(a, b)
-    a.to_i - b.to_i
-  end
-
-  def multiplied(a, b)
-    a.to_i * b.to_i
-  end
-
-  def divided(a, b)
-    a.to_i / b.to_i
   end
 end
