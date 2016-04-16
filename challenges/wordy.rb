@@ -1,9 +1,9 @@
 class WordProblem
   OPERATORS = {
-    'minus' => '-',
-    'plus'  => '+',
-    'divided' => '/',
-    'multiplied' => '*',
+    'minus'       => '-',
+    'plus'        => '+',
+    'divided'     => '/',
+    'multiplied'  => '*',
     }
 
   attr_reader :question
