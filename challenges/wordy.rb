@@ -1,68 +1,58 @@
+require 'pry'
 class WordProblem
   OPERATORS = {
     'minus'       => '-',
     'plus'        => '+',
     'divided'     => '/',
-    'multiplied'  => '*',
-    }
+    'multiplied'  => '*'
+  }.freeze
 
-  attr_reader :question
+  attr_reader :question, :operators, :numbers
 
   def initialize(question)
     @question = question
+    @numbers = parse_numbers
+    @operators = convert_operators
     validations
   end
 
   def answer
-    simple_operation? ? simple_operation : complex_operation
+    iterate_number_pairs
   end
 
   private
 
-  def simple_operation?
-    stripped.length < 3
-  end
-
   def validations
     fail ArgumentError if question.include?("cubed")
-    fail ArgumentError if question.include?("Who")
+    fail ArgumentError unless numbers.length == (operators.length + 1)
   end
 
-  def stripped
-    remove_by_from(terms_and_operators)
+  def parse_numbers
+    question.scan(/-*\d+/).map(&:to_i)
   end
 
-  def remove_by_from(array)
-    array.delete('by') if array.include?('by')
-    array
+  def convert_operators
+    parse_operators.map { |word| OPERATORS[word] }
   end
 
-  def terms_and_operators
-    question.scan(/-*\d+.+-*\d+/).first.split(" ")
+  def parse_operators
+    question.split(' ').select { |word| OPERATORS.keys.include?(word) }
   end
 
-  def simple_operation
-    operator = stripped[1]
-    a        = stripped[0].to_i
-    b        = stripped[2].to_i
-    operation(operator, a, b)
-  end
+  def iterate_number_pairs
+    counter = 0
+    total = numbers.first
 
-  def operation(operator, a, b)
-    a.send OPERATORS[operator], b
-  end
-
-  def complex_operation
-    counter  = 3
-    total    = simple_operation
-    operator = stripped[counter]
-    b        = stripped[counter + 1].to_i
-
-    while counter < stripped.length
-      total = operation(operator, total, b)
-      counter += 2
+    numbers.each_cons(2) do |pair|
+      total = operation(a: total, b: pair.last, operator: operators[counter])
+      counter += 1
+      break if counter > operators.length
     end
 
     total
+  end
+
+  def operation(a: nil, b: nil, operator: nil)
+    a.send operator, b
   end
 end
