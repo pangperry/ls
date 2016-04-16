@@ -10,6 +10,7 @@ class WordProblem
 
   def initialize(question)
     @question = question
+    validations
   end
 
   def answer
@@ -19,7 +20,6 @@ class WordProblem
   private
 
   def simple_operation?
-    validations
     stripped.length < 3
   end
 
