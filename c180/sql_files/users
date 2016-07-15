@@ -1,0 +1,382 @@
+dropdb book_sql
+list
+/list
+q
+/q
+\q
+\q
+\q
+\l
+\q
+\list
+\c library
+dropdb library
+\q
+\l
+CREATE TABLE users (
+id serial,
+username CHAR(25) NOT NULL,
+enabled boolean DEFAULT TRUE,
+PRIMARY KEY (id)
+);
+\dt
+\d
+\dt
+\d
+\dt
+\d
+\l
+\d library
+\dt
+/dt users
+\dt users
+\dt users
+\d users
+IN
+\ ls
+\?
+\r
+INSERT INTO users (id, username, enabled)
+VALUES (20, 'John Smith', false);
+INSERT INTO users (id, username, enabled)
+VALUES (20, 'John Smith', false);
+\dt
+\d users
+INSERT INTO users (username)
+VALUES ('John Smith');
+INSERT INTO users (username, enabled)
+VALUES ('Harry Potter', false);
+INSERT INTO users (enabled)
+VALUES (false);
+SELECT * FROM users;
+SELECT username FROM users;
+SELECT username, id FROM users;
+SELECT username from users WHERE enabled = true;
+SELECT username, id from users WHERE enabled = true;
+SELECT username, id from users WHERE enabled != true;
+SELECT username, id FROM USERS ORDER BY unsername;
+SELECT username, id FROM users ORDER BY unsername;
+SELECT username, id FROM users ORDER BY username;
+SELECT username, id FROM users ORDER BY username ASC;
+SELECT username, id FROM users ORDER BY username DESC;
+\q
+DELETE FROM users;
+INSERT into users(username, enabled)
+VALUES('John Smith', false);
+INSERT into users(username, enabled)
+VALUES('John Smith II', false);
+INSERT into users(username, enabled)
+VALUES('John Smith III', false);
+INSERT into users(username, enabled)
+VALUES('John Smith III', true);
+INSERT into users(username, enabled)
+VALUES('Jack Smith III', true);
+INSERT into users(username, enabled)
+VALUES('Jack Smith II', true);
+INSERT into users(username, enabled)
+VALUES('Jack Smith I', true);
+SELECT * FROM users;
+UPDATE users SET enabled = true
+WHERE username = 'John Smith II';
+SELECT * FRom users;
+UPDATE users SET enabled = false;
+SELECT * FROM users;
+UPDATE users SET enabled = true
+WHERE rtrim(username) LIKE '% II';
+SELECT * FROM users;
+DELETE FROM users WHERE username = 'John Smith';
+SELECT * FROM users;
+ALTER TABLE users ADD COLUMN last_login_timestamp NOT NULL DEFAULT NOW();
+ALTER TABLE users ADD COLUMN last_login timestamp NOT NULL DEFAULT NOW();
+\d
+\dt users
+\d users
+SELECT * FROM users;
+ALTER TABLE users RENAME COLUMN username TO full_name;
+\d
+\dt
+\d users
+\dt users
+\dt
+\d users
+ALTER TABLE users ALTER COLUMN full_name TYPE VARCHAR(25);
+\d users
+ALTER TABLE users ALTER COLUMN full_name TYPE VARCHAR(5);
+SELECT * FROM users;
+ALTER TABLE users DROP COLUMN enabled;
+SELECT * FROM users;
+ALTER TABLE users RENAME TO all_users;
+\d all_users
+\d users
+DROP TABLE all_users;
+\d all_users
+\d
+\d users
+\l
+\q
+\l
+\dt
+\q
+\d
+\d users
+\dt users
+SELECT * users;
+\d
+SELECT * FROM users;
+SELECT * FROM users_id_seq;
+UPDATE users SET enabled = true
+WHERE username = 'John Smith II';
+SELECT username FROM users WHERE username LIKE '% II';
+SELECT username FROM users WHERE rtrim(username) LIKE '% II';
+SELECT * FROM users;
+ALTER users ADD last_login_timestamp NOT NULL DEFAULT now();
+ALTER TABLE users ADD last_login_timestamp NOT NULL DEFAULT now();
+ALTER TABLE users ADD COLUMN last_login_timestamp NOT NULL DEFAULT now();
+ALTER TABLE users ADD COLUMN last_login_timestamp NOT NULL DEFAULT now();
+\d
+\dt
+\d users
+\dt users
+\d
+\d users
+\dt users
+SELECT * FROM users;
+ALTER TABLE users ADD COLUMN last_login TIMESTAMP NOT NULL DEFAULT NOW();
+\q
+\l
+\d library
+\dt library
+\q
+\q
+\l
+\d library
+\dt library
+\l
+\d
+\dt
+\d users
+SELECT * FROM users;
+\q
+\d
+\d
+\l
+\d library
+\dt
+\d
+\d
+\d library
+\d usser
+\d users
+\dt library
+\q
+CREATE TABLE users (
+id serial,
+username VCHAR(25) NOT NULL,
+enabled BOOLEAN DEFAULT TRUE,
+last_login TIMESTAMP NOT NULL DEFAULT now());
+CREATE TABLE users (
+id serial,
+username VARCHAR(25) NOT NULL,
+enabled BOOLEAN DEFAULT TRUE,
+last_login TIMESTAMP NOT NULL DEFAULT now());
+\q
+\d
+\d users
+ALTER TABLE users ADD COLUMN book_title VARCHAR(25),
+ADD COLUMN review_content VARCHAR(50),
+ADD COLUMN rating INT,
+ADD COLUMN address VARCHAR(255);
+\d
+\d users
+\dt users
+\dt
+\d users
+INSERT INTO users (username, enabled, book_title, review_content, rating, address)
+VALUES ('John Smith', false, 'Chaos', 'What is the butterfly effect?', 5, '2 Market Street');
+INSERT INTO users (username, enabled, book_title, review_content, rating, address)
+VALUES ('Jane Smith', true, 'Simple Taosim', 'About Living in balance', 5, '3 Market Street');
+INSERT INTO users (username, enabled, book_title, review_content, rating, address)
+VALUES ('Jane Smith', true, 'The Storyteller', 'Memories of WWII', 4, '3 Market Street');
+SELECT * FROM users;
+\d users
+CREATE TABLE addresses (
+user_id int NOT NULL,
+street VARCHAR(30) NOT NULL,
+city VARCHAR(30) NOT NULL,
+state VARCHAR(30) NOT NULL,
+PRIMARY KEY (user_id),
+CONSTRAINT fk_use_id FOREIGN KEY (user_id) REFERENCES users (id)
+);
+\d users
+\d address
+\dt
+\d addresses
+\d
+CREATE TABLE books (
+id SERIAL,
+titleVARCHAR(100) NOT NULL,
+;
+\q
+ls
+\s
+\d
+CREATE TABLE books (
+id SERIAL,
+title VARCHAR(100) NOT NULL,
+author VARCHAR(100) NOT NULL,
+published_date timestamp NOT NULL,
+isbn int,
+PRIMARY KEY (id),
+UNIQUE (isbn)
+);
+\d
+CREATE TABLE books (
+id SERIAL,
+title VARCHARS(100) NOT NULL,
+author VARCHAR(100) NOT NULL,
+published_date TIMESTAMP NOT NULL,
+isbn INT,
+PRIMARY KEY (id),
+UNIQUE (isbn)
+);
+CREATE TABLE books (
+id SERIAL,
+title VARCHAR(100) NOT NULL,
+author VARCHAR(100) NOT NULL,
+published_date TIMESTAMP NOT NULL,
+isbn INT,
+PRIMARY KEY (id),
+UNIQUE (isbn)
+);
+DROP TABLE IF EXISTS reviews;
+CREATE TABLE reviews (
+id SERIAL,
+book_id INT NOT NULL,
+user_id INT NOT NULL,
+review_content VARCHAR(255),
+rating INT,
+published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (id),
+FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCASE
+);
+CREATE TABLE reviews (
+id SERIAL,
+book_id INT NOT NULL,
+user_id INT NOT NULL,
+review_content VARCHAR(255),
+rating INT,
+published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (id),
+FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+CREATE TABLE users_books (
+user_id INT NOT NULL,
+book_id INT NOT NULL,
+checkout_date TIMESTAMP,
+return_date TIMESTAMP,
+PRIMARY KEY (user_id, book_id),
+FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE,
+FOREIGN KEY (book_id) REFERENCES books(id) ON UPDATE CASCADE
+);
+\d
+\d books
+SELECT reviews.*, users.* FROM reviews LEFT JOIN users ON (users.id = reviews.user_id);
+SELECT reviews.*, users.* FROM reviews LEFT JOIN users ON (users.id = reviews.user_id);
+INSERT INTO books( title , author, published_date, isbn) values ('My first rails book', 'Mereda', now(),1234567890);
+INSERT INTO books( title , author, published_date, isbn) values ('My first rails book', 'Mereda', now(),1234567890);
+ELECT reviews.*, users.* FROM reviews LEFT JOIN users ON (users.id = reviews.user_id);
+SELECT reviews.*, users.* FROM reviews LEFT JOIN users ON (users.id = reviews.user_id);
+\d
+\d
+\q
+\d
+\dt
+\l
+CREATE TABLE users (
+id serial,
+username CHAR(25) NOT NULL,
+enabled BOOLEAN DEFAULT TRUE,
+PRIMARY KEY (id)
+);
+users \d
+\d users
+\dt users
+users \dt
+\d users
+\dt
+\dusers
+\d users
+INSERT INTO users (id, username, enabled)
+VALUES (20, 'John Smith', false);
+INSERT INTO users (id, username, enabled)
+VALUES (20, 'John Smith', false);
+\d
+\d users
+SELECT * FROM users;
+INSERT INTO users (id, username, enabled)
+VALUES (20, 'John Smith', false);
+INSERT INTO users (username)
+VALUES ('John Smith');
+SELECT * FROM users;
+INSERT INTO users (username, enabled)
+VALUES ('Harry Potter', false);
+INSERT INTO users (enabled)
+VALUES (false);
+SELECT * FROM users;
+SELECT username FROM users;
+SELECT username, id FROM users;
+SELECT username FROM users WHERE enabled = true;
+SELECT username, id FROM users ORDER BY username;
+SELECT username, id FROM users ORDER BY id DESC;;
+SELECT username, id FROM users ORDER BY id;
+SELECT username, id FROM users ORDER BY id ASC;
+SELECT username, id FROM users ORDER BY id DESC;
+DELETE FROM users;
+INSERT INTO users (username, enabled)
+VALUES ('John Smith', false);
+INSERT INTO users (username, enabled)
+VALUES ('John Smith II', false);
+INSERT INTO users (username, enabled)
+VALUES ('John Smith III', false);
+INSERT INTO users (username, enabled)
+VALUES ('John Smith III', true);
+INSERT INTO users (username, enabled)
+VALUES ('Jack Smith III', true);
+INSERT INTO users (username, enabled)
+VALUES ('Jack Smith II', true);
+INSERT INTO users (username, enabled)
+VALUES ('Jack Smith I', true);
+SELECT * FROM users;
+UPDATE users SET enabled = true
+WHERE username = 'John Smith II';
+SELECT * FROM users;
+UPDATE users SET enabled = false;
+SELECT * FROM users;
+UPDATE users SET enabled = true
+WHERE rtrim(username) LIKE '% II';
+SELECT * FROM users;
+DELETE FROM users WHERE username = 'John Smith';
+SELECT * FROM users;
+ALTER TABLE users ADD COLUMN last_login TIMESTAMP NOT NULL DEFAULT NOW();
+SELECT * FROM users;
+ALTER TABLE users RENAME username TO full_name;
+SELECT * FROM users;
+ALTER TABLE users ALTER COLUMN full_name TYPE VARCHAR(25);
+\d users
+ALTER TABLE users ALTER COLUMN full_name TYPE VARCHAR(5);
+ALTER TABLE users DROP COLUMN enabled;
+ALTER TABLE users RENAME TO all_users;
+\d all_users
+SELECT * FROM all_users;
+DROP TABLE all_users;
+\q
+CREATE TABLE users (
+id SERIAL,
+username VARCHAR(25) NOT NULL,
+enabled BOOLEAN DEFAULT TRUE,
+last_login TIMESTAMP NOT NULL DEFAULT NOW()
+);
+\d
+\s users
