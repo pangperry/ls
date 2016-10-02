@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font: normal 16px Helvetica, Arial, sans-serif;
+  background: #ffffff;
+}
+
+body {
+  font: normal 16px Helvetica, Arial, sans-serif;
+  color: #545459;
+  background: #fff;
+}
+
+.container {
+  border: solid black 2px;
+  width: 1000px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/**** INLINE ****/
+
+section h1, section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ce4a4a;
+  margin: 20px 0;
+}

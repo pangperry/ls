@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Exercise 1 in forms!</title>
+    <meta charset="utf-8">
+    <style> <!--using style tags for exercise only-->
+      label,
+      input,
+      textarea {
+        display: block;
+      }
+
+      </style>
+  </head>
+  <body>
+    <form action="" method="post">
+      <fieldset class="account-info">
+        <label>
+          Your Name
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email-address" required>
+        </label>
+        <label>
+          Phone Number
+          <input type="tel" name="phone" required>
+        </label>
+        <label>
+          Message
+          <textarea name="message"></textarea>
+        </label>
+
+        <label>
+          <button name="submit">Send Message</button>
+        </label>
+        <label>
+          <button name="clear">Clear</button>
+        </label>
+      </fieldset>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+table {
+  background: #a7ceff;
+  width: 100%;
+  border-spacing: 0;
+}
+
+td {
+  background: #ffffcc;
+  text-align: center;
+  width: 25%;
+  margin: 10px; <!--"Margin does not get applied to elements that are a display type of table-cell. This is why we have a border-spacing property instead"-->
+}

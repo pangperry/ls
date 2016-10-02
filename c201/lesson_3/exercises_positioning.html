@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Positioning</title>
+    <meta charset="utf-8">
+    <style>
+      #positioned {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        /* Add a z-index greater than the elements you want to appear on top of */
+        z-index: 2;
+        width: 400px;
+        padding: 30px 15px;
+        margin-left: -200px;
+        background: #ffffcc;
+        box-sizing: border-box;
+      }
+
+      #fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+        background: rgba(0, 0, 0, .6);
+      }
+      #positioned span {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: 20px;
+        height: 20px;
+        background: #fcfc99;
+      }
+
+      
+    </style>
+  </head>
+  <body>
+    <section>
+      <p>Occupy distillery normcore, tilde raclette roof party fashion axe +1 yuccie narwhal. 
+      Bicycle rights humblebrag umami, sriracha edison bulb live-edge fap ugh godard disrupt 
+      paleo salvia. Everyday carry aesthetic waistcoat ethical, vape salvia mixtape mlkshk 
+      post-ironic hammock live-edge trust fund. Vaporware skateboard brunch craft beer. La 
+      croix food truck lo-fi, meh waistcoat butcher forage four loko craft beer knausgaard 
+      jean shorts hashtag plaid enamel pin cronut. Tumblr pickled vaporware subway tile 
+      cornhole brunch, helvetica tote bag wayfarers art party slow-carb. Paleo bicycle rights 
+      hell of taxidermy.</p>
+
+      <p>DIY trust fund af, meh kickstarter plaid mustache dreamcatcher irony retro jianbing 
+      aesthetic. Letterpress fap ramps cold-pressed semiotics, readymade wolf heirloom 
+      chartreuse hammock glossier. Stumptown roof party dreamcatcher, brooklyn butcher umami 
+      kinfolk raclette master cleanse pinterest. Shoreditch crucifix venmo tilde. Green juice 
+      brooklyn snackwave, lo-fi fanny pack squid letterpress lomo. Fam man braid aesthetic 
+      next level affogato. Crucifix microdosing next level, fanny pack bitters you probably 
+      haven't heard of them synth lyft swag helvetica echo park unicorn.</p>
+
+      <p>Food truck vinyl paleo ethical prism. Whatever dreamcatcher 90's quinoa farm-to-table,
+      plaid ethical fixie locavore tacos bespoke you probably haven't heard of them. Lo-fi 
+      activated charcoal wayfarers, pinterest umami hoodie trust fund cardigan vegan kogi 
+      mustache tousled pickled bitters banh mi. Kogi migas raw denim cred artisan. Franzen irony 
+      freegan cardigan pinterest put a bird on it +1 paleo. Pabst post-ironic whatever, 
+      church-key succulents distillery hashtag. Artisan farm-to-table slow-carb, pork belly 
+      hell of schlitz woke.</p>
+
+      <p>Organic irony dreamcatcher, disrupt quinoa ennui health goth church-key heirloom kitsch. 
+      Yr four loko ethical, letterpress schlitz fanny pack jianbing 8-bit. Skateboard biodiesel 
+      offal, craft beer iPhone sartorial truffaut tumeric. You probably haven't heard of them 
+      bitters meggings deep v +1 small batch. Pinterest vaporware craft beer cronut ramps godard, 
+      chillwave VHS kogi unicorn la croix PBR&B photo booth. Twee tousled bespoke, af marfa 
+      jianbing tacos vinyl 8-bit irony. Hammock tote bag meditation forage trust fund deep v.</p>
+
+      <p>Hot chicken cold-pressed typewriter mixtape disrupt, cliche single-origin coffee 8-bit 
+      tacos meggings pork belly banjo kitsch +1 plaid. Kickstarter asymmetrical 3 wolf moon, 
+      leggings art party drinking vinegar keffiyeh subway tile irony butcher cliche pork belly. 
+      Freegan chillwave salvia gastropub pinterest activated charcoal. Freegan heirloom la croix, 
+      butcher cliche fingerstache bicycle rights flexitarian actually try-hard trust fund cred 
+      tacos gentrify. Plaid shabby chic fap etsy iPhone migas. Cornhole flannel pabst tilde, 
+      bushwick kale chips keytar prism four dollar toast hammock retro 90's. 8-bit everyday carry 
+      shoreditch thundercats mustache locavore, kitsch occupy.</p>
+
+      <p>Salvia heirloom mixtape street art fashion axe, affogato fap live-edge disrupt snackwave 
+      pop-up. Meditation crucifix fam, forage actually activated charcoal man braid iceland tilde 
+      bespoke poke raw denim irony. Blog lo-fi letterpress shabby chic kinfolk, shoreditch 
+      tattooed roof party. Wayfarers typewriter etsy, keytar YOLO disrupt schlitz tousled normcore 
+      iPhone. Snackwave hexagon scenester iPhone celiac iceland. Tofu yr ramps tumeric chillwave 
+      art party. Bespoke readymade four dollar toast, iceland DIY coloring book trust fund woke 
+      hoodie chartreuse vinyl echo park banh mi.</p>
+    </section>
+
+    <div id="fixed"></div>
+    <div id="positioned">
+      <span></span>
+      I'm positioned!</div>
+  </body>
+
+</html>

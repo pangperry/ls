@@ -1,0 +1,14 @@
+ul {
+  padding: 0;
+  list-style: none;
+  background: #a7ceff;
+}
+
+li {
+  display: inline-block;
+  width: 25%;
+  min-height: 120px;
+  line-height: 120px;
+  text-align: center;
+  background: #ffffcc;
+}
