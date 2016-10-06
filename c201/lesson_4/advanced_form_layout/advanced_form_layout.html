@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Advanced Form Layout</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form action method="post">
+      <h1>Create Your Profile</h1>
+      <fieldset>
+        <h2>Personal Info</h2>
+        <dl>
+          <dt>
+            <label>Your Name</label>
+          </dt>
+          <dd>
+            <input class="name" type="text" placeholder="First"><!--
+            --><input class="name" id="last" type="text" placeholder="Last">
+          </dd>
+        </dl>
+        <dl class="email">
+          <dt>
+            <label>Email</label>
+          </dt>
+          <dd>
+            <input type="email">
+          </dd>
+        </dl>
+      </fieldset>
+
+      <fieldset> <!-- using more dls here so I can style for one line -->
+        <h2>Social Media Accounts</h2>
+        <dl class="partial third">
+          <dt>
+            <label>Facebook</label>
+          </dt>
+          <dd>
+            <input type="email">
+          </dd>
+        </dl><!--
+        --><dl class="partial third">
+          <dt>
+            <label>Twitter</label>
+          </dt>
+          <dd>
+            <input type="text">
+          </dd>
+        </dl><!--
+        --><dl class="partial third last">
+          <dt>
+            <label>Linkedin</label>
+          </dt>
+          <dd>
+            <input type="text">
+          </dd>
+        </dl>
+      </fieldset>
+
+      <fieldset>
+        <h2>Account Info</h2>
+        <dl>
+          <dt>
+            <label>Profile Name</label>
+          </dt>
+          <dd>
+            <input type="text">
+          </dd>
+        </dl>
+        <dl class="partial half">
+          <dt>
+            <label>Password</label>
+          </dt>
+          <dd>
+            <input type="password">
+          </dd>
+        </dl><!--
+        --><dl class="partial half last">
+          <dt>
+            <label>Confirm Password</label>
+          </dt>
+          <dd>
+            <input type="password">
+          </dd>
+        </dl>
+      </fieldset>
+
+      <fieldset>
+        <h2>Bio</h2>
+        <textarea name="bio"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <input type="checkbox">
+        <span class="check">I agree to treat other users with respect, and will not say anything at all if I have nothing nice to say.<span>
+            <input type="submit" value="Create Account">
+      </fieldset>
+    </form>
+  </body>
+</html>

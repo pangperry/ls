@@ -1,0 +1,100 @@
+@import url("whitespace-reset.css");
+
+
+body {
+  font: normal 16px Helvetica, Arial, sans-serif;
+  color: #282828;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+form {
+  max-width: 600px;
+  min-width: 350px;
+  margin: 0 auto;
+}
+fieldset {
+  padding: 28px 37px;
+  margin-bottom: 2px;
+  border-left: 4px solid #cccccc;
+  background: #ececec;
+}
+h1 {
+  padding-bottom: 24px;
+  font-size: 28px;
+  font-weight: normal;
+  margin: 11px 0;
+}
+
+h2 {
+  padding-bottom: 19px;
+  font-size: 20px;
+}
+
+dt {
+  margin-bottom: 15px;
+}
+dd {
+  display: block;
+  margin-bottom: 27px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  height: 40px;
+  width: 100%;
+  border: 1px solid #3167ae;
+  border-radius: 4px;
+  padding: 15px 0 15px 10px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 108px;
+  resize: vertical;
+}
+input[type='checkbox'] {
+  margin-right: 12px;
+}
+
+input[type="submit"] {
+  display: block;
+  font: normal 16px Helvetica, Arial, sans-serif;
+  height: 50px;
+  margin-top: 25px;
+  width: 175px;
+  background: #0066cc;
+  color: #ffffff;
+  border-radius: 4px;
+  border: none;
+}
+
+input.name {
+  width: 49%;
+}
+input#last {
+  float: right;
+}
+dl.email {
+  clear: both;
+}
+dl.partial {
+  display: inline-block;
+  padding-right: 20px;
+  vertical-align: top;
+  box-sizing: border-box;
+}  
+dl.third {
+  width: 33.3%;
+}
+dl.last {
+  padding-right: 0;
+}
+dl.half {
+  width: 50%;
+}
+
+span {
+  color: #666666;
+}
+
