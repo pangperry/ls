@@ -67,6 +67,10 @@ input[type="submit"] {
   color: #ffffff;
   border-radius: 4px;
   border: none;
+  cursor: default;
+}
+input[type="submit"]:hover {
+  background: #5f95cc;
 }
 
 input.name {
@@ -94,7 +98,7 @@ dl.half {
   width: 50%;
 }
 
-span {
+label.checkbox {
   color: #666666;
 }
 
