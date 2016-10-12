@@ -1,0 +1,35 @@
+/*
+#content,
+#sidebar {
+  float: left;
+  padding: 20px 30px;
+  box-sizing: border-box;
+}
+
+#content {
+  width: 70%;
+}
+
+#sidebar {
+  width: 30%;
+}
+*/
+main {
+  min-width: 600px;
+  max-width: 1400px;
+}
+ 
+#content,
+#sidebar {
+  padding: 20px 30px;
+}
+
+#content {
+  float: left;
+  width: 70%;
+  box-sizing: border-box;
+}
+
+#sidebar {
+  overflow: hidden;
+}

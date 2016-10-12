@@ -1,0 +1,113 @@
+@import url(whitespace-resets.css);
+body {
+  font: 28px "Helvetica", Arial, sans-serif;
+  background: #ffffff;
+  margin: 10px;
+}
+
+article {
+  width: 680px;
+  padding: 10px 15px 15px 15px;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+}
+
+header {
+  margin-bottom: 10px;
+  border-bottom: 15px solid #000000;
+}
+
+header dl {
+  display: inline-block;
+  width: 50%;
+  padding: 5px 0;
+}
+header dl + dl {
+  text-align: right;
+}
+header dl + dl dt {
+  font-weight: 500;
+}
+h1 {
+  font-size: 56px;
+  font-weight: bold;
+}
+h2 {
+  padding: 10px 0;
+  margin: 5px 0 0 0;
+  border-top: 30px solid #000000;
+  border-bottom: 1px solid #000000;
+}
+
+dt {
+  display: inline;
+  font-weight: 600px;
+}
+dd {
+  display: inline;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse;
+}
+thead th {
+  text-align: right;
+}
+tbody {
+  border-bottom: 30px solid #000000;
+}
+tbody th {
+  text-align: left;
+  border-top: 1px solid #000000;
+}
+tbody td {
+  border-top: 1px solid #000000;
+}
+
+tbody + tbody tr:first-of-type td {
+  border-top: 20px solid #000000;
+}
+tbody + tbody tr td:last-of-type {
+  font-weight: normal;
+}
+tr td:last-of-type {
+  font-weight: 600;
+  text-align: right;
+}
+td.indent {
+  width: 28px;
+  border-top: none;
+}
+tfoot td:last-of-type {
+  padding: 14px 0 14px 18px;
+  font-size: 25px; 
+  font-weight: normal;
+  text-align: left;
+  text-indent: -16px;
+  border-top: 1px solid #000000;
+}
+table + table {
+  font-size: 24px;
+}
+table + table thead th {
+  width: 37%;
+  font-weight: normal;
+  text-align: left;
+  border-bottom: 1px solid #000000;
+}
+table + table thead th + th {
+  width: 21%;
+}
+table + table tr td:last-of-type {
+  font-weight: normal;
+  text-align: left;
+}
+table + table td {
+  border: none;
+}
+table + table td.indent {
+  width: auto;
+  text-indent: 33.5px;
+}
