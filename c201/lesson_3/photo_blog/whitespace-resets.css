@@ -1,0 +1,35 @@
+TML and CSSLesson 3: Working with Design FilesCSS Resets
+CSS Resets
+
+Now that you've worked on a couple web pages yourself, you've seen that the browser has styles that it uses to initially style every web page. If you create an HTML file with text wrapped in various elements, the browser will assign certain styles to those elements so the page is a bit more readable than just a blob of text. This is great if all we have is an HTML page, but now that we're using CSS to style our pages, we probably don't need the assistance of the browser to make our pages look presentable.
+
+These styles can be overridden on a per-property basis, but we'd generally have to write more CSS just to get our pages to look the way they are designed. We also don't know from looking at the CSS file that there's still values like margins on headings and paragraphs because the values are coming from the browser rather than our styles. This is how a CSS reset comes in handy.
+
+A reset is a series of selectors and properties that make sure that all browsers rendering your web pages start with the same CSS values for every element. Typically, padding and margin are reset to 0 and font sizes are all reset. You're then free to add the values you need and don't have to worry about any additional padding or margin values affecting the design. Others are even more aggressive and will reset font weights to normal for headings and bolded elements.
+
+Resets end up becoming indispensible when it comes to working quickly and efficiently in CSS. Once you have chosen a reset you prefer and have used it in a number of projects, try creating a site without one and see how much of a benefit having a reset is. You won't have to think about what existing values are on an element again, and won't have minor differences between browser types.
+
+There are a number of resets out there to choose from Eric Meyer's reset to Normalize.css, with varying degrees of aggressiveness when it comes to which properties and elements are reset. It's very likely that you'll end up taking a reset that you mostly like, but want to change a couple parts of it or maybe add to it. Many people use a customized reset. We actually use a custom reset on our example pages throughout this course. It's a very simple reset based off of Tantek Celik's whitespace reset.
+
+/*
+----------------------------------------
+Tantek Celik's Whitepsace Reset
+Author:    Tantek Celik, Shane Riley
+Version:    (CC) 2010 Some Rights Reserved - http://creativecommons.org/licenses/by/2.0
+Description:  Resets default styling of common browsers to a common base
+----------------------------------------
+ */
+
+ul,ol { list-style: none; }
+h1,h2,h3,h4,h5,h6,pre,code { font-size: 1em; }
+ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input,dl,dt,dd, figure, figcaption {
+  margin: 0;
+  padding: 0; }
+a img,:link img,:visited img, fieldset { border: none; }
+address { font-style: normal; }
+header, section, article, nav, footer, hgroup, details, summary, figure, main { display: block; }
+mark {
+  color: inherit;
+  background: transparent; }
+abbr { border: none; }
+summary::-webkit-details-marker { display: none; }

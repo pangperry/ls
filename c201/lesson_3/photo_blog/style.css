@@ -1,0 +1,78 @@
+@import url("whitespace-resets.css");
+
+body {
+  font: normal 18px "Roboto Condesnsed", Arial, sans-serif;
+  color: #3e606f;
+  background-image: linear-gradient(to bottom, #d1dcbd, #fcfff4);
+  background-repeat: no-repeat;
+}
+
+
+header {
+  width: 920px;
+  padding: 20px 20px 0 20px;
+  margin: 0 auto;
+}
+
+h1 {
+  float: left;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  background: transparent url("logo.png") 0 0 no-repeat;
+  padding: 45px 0 25px 115px;
+}
+
+nav {
+  float: right;
+  padding-top: 87px;
+}
+li {
+  display: inline-block;
+}
+a {
+  text-decoration: none;
+  padding: 16px 43px 15px 43px;
+  background: #fcfff5;
+  color: #91aa9d;
+  border-radius: 8px 8px 0 0;
+}
+.active {
+  background: #91aa9d;
+  color: #e3eae0;
+}
+main {
+  clear: both;
+  overflow: hidden;
+  width: 900px;
+  padding: 30px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 5px 5px  #bebebd;
+}
+#masthead {
+  margin-bottom: 45px;
+}
+h2 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+p {
+  margin-bottom: 25px;
+}
+#article {
+  float: right;
+  padding: 0 0 15px 43px;
+}
+
+footer {
+  clear: right;
+  font-size: 14px;
+  width: 960px;
+  margin: 0 auto;
+}
+
+footer p {
+  margin-top: 13px;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Intro to CSS Frameworks</title>
+    <style>
+      .row {
+        clear: both;
+      }
+      .row:after {
+        display: block;
+        clear: both;
+        line-height: 0;
+        content: "";
+      }
+
+      .fourth {
+        float: left;
+        width: 23.5%;
+      }
+
+      .fourth + .fourth {
+        margin-left: 2%;
+      }
+      .mobile {
+        display: none;
+      }
+      @media (max-width: 767px) {
+        .mobile {
+          display: block;
+        }
+        .desktop {
+          display: none;
+        }
+        .fourth {
+          float: none;
+          width: auto;
+        }
+        .fourth + .fourth {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="row">
+    <h1 class="desktop">Desktop</h1>
+    <h1 class="mobile">Mobile</h1>
+      <ul>
+        <li class="fourth">8 GB SD card</li>
+        <li class="fourth">16 GB SD card</li>
+        <li class="fourth">32 GB SD card</li>
+        <li class="fourth">64 GB SD card</li>
+      </ul>
+    </main>
+  </body>
+
+</html>
