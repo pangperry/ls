@@ -1,0 +1,1 @@
+var denominator = 2;
