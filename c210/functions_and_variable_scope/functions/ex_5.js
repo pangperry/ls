@@ -11,4 +11,4 @@ function sum(values) {
 }
 
 temperatures = [56, 58, 60, 62, 54];
-console.log(average());
+console.log(average(temperatures));

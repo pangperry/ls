@@ -1,7 +1,15 @@
+//Uncaught ReferenceError: a is not defined
 console.log(a);
 
+function hello() {
+    a = 1;
+}
+
+
+//works because a resolves to global variable and then it's value is logged
 function hello() {
   a = 1;
 }
 
-\\Uncaught ReferenceError: a is not defined
+hello();
+console.log(a);
