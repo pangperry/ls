@@ -20,7 +20,7 @@ function longestSentence(text) {
 
 function log(sentence, maxLength) {
   console.log(sentence);
-  console.log('The longest sentence has ' + maxLength + ' words');
+  console.log('The longest sentence has ' + maxLength + ' words.');
 }
 
 var longText = 'Four score and seven years ago our fathers brought forth' +
