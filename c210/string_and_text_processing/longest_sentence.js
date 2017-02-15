@@ -1,28 +1,28 @@
 function longestSentence(text) {
-  var sentences = text.split(/[?.!]/).map(function(sentence) {
+  var sentences;
+  var wordCounts;
+  var length;
+
+  sentences = text.split(/[?.!]/).map(function(sentence) {
     return sentence.trim();
   });
 
-  var wordCounts = sentences.map(function(sentence) {
+  wordCounts = sentences.map(function(sentence) {
     return sentence.replace(/[^0-9a-z\s]+/,'').split(/\s+/).length;
   });
 
-  var maxCount = wordCounts.reduce(function(a,b) {
-    if (a > b) {
-      return a;
-    } else if (b > a) {
-      return b;
-    }
+  length = wordCounts.reduce(function(a,b) {
+    return Math.max(a,b);
   }); 
 
-  var index =  wordCounts.indexOf(maxCount);
-  log(sentences[index], length);
+  log(sentences[wordCounts.indexOf(length)], length);
 }
 
 function log(sentence, length) {
   console.log(sentence);
   console.log('The longest sentence has ' + length + ' words');
 }
+
 
 
 var longText = 'Four score and seven years ago our fathers brought forth' +
