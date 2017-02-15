@@ -1,5 +1,12 @@
+var positiveWords = ['fortune', 'dream', 'love', 'respect', 'patience', 'devout', 'noble', 'resolution'];
+var negativeWords = ['die', 'heartache', 'death', 'despise', 'scorn', 'weary', 'trouble', 'oppress'];
 
-var pattern = /(and?)/i
+function sentiment(text) {
+  var sentimentScore = 0;
+
+
+}
+
 
 var textExcerpt = 'To be or not to be-that is the question:\n' +
 'Whether \'tis nobler in the mind to suffer\n' +
@@ -37,6 +44,4 @@ var textExcerpt = 'To be or not to be-that is the question:\n' +
 'The fair Ophelia.-Nymph, in thy orisons\n' +
 'Be all my sins remembered';
 
-
- var count = textExcerpt.match(pattern);
- console.log(count);
+sentiment(textExcerpt);

@@ -1,6 +1,3 @@
-
-var pattern = /(and?)/i
-
 var textExcerpt = 'To be or not to be-that is the question:\n' +
 'Whether \'tis nobler in the mind to suffer\n' +
 'The slings and arrows of outrageous fortune,\n' +
@@ -38,5 +35,31 @@ var textExcerpt = 'To be or not to be-that is the question:\n' +
 'Be all my sins remembered';
 
 
- var count = textExcerpt.match(pattern);
- console.log(count);
+var positiveRegex = /(fortunes?)|(dream(s|t|ed)?)|(love(s|d)?)|(respect(s|ed)?)|(patien(ce|t)?)|(devout(ly)?)|(nobler?)|(resolut(e|ion)?)/gi;
+var negativeRegex = /(die(s|d)?)|(heartached?)|(death)|(despise(s|d)?)|(scorn(s|ed)?)|(weary)|(troubles?)|(oppress(es|ed|or('s)?)?)/gi;
+
+
+function sentiment(text) {
+  console.log(text.match(positiveRegex));
+  var positives = text.match(positiveRegex);
+  var negatives = text.match(negativeRegex);
+  var textSentiment;
+
+  console.log('There are ' + positives.length + ' positive words in the text.');
+  console.log('Positive sentiments: ' + positives.join(' '));
+  console.log('');
+  console.log('There are ' + negatives.length + ' negative words in the text.');
+  console.log('Negative sentiments: ' + negatives.join(' '));
+
+  if (positives.length > negatives.length) {
+    textSentiment = 'Positive';
+  } else if (positives.length < negatives.length) {
+    textSentiment = 'Negative';
+  } else {
+    textSentiment = 'Neutral';
+  }
+
+  console.log('The sentiment of the text is ' + textSentiment + '.');
+}
+
+sentiment(textExcerpt);

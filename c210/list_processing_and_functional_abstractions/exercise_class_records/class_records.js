@@ -7,12 +7,11 @@ function generateClassRecordSummary(scores) {
     return score.exams;
   });
 
-      console.log(examData);
   return {
     studentGrades: scoreData.map(function(scoreObj) {
                      return getStudentScore(scoreObj);
                    }),
-      exams: getExamSummary(examData),
+    exams: getExamSummary(examData),
   }
 }
 
