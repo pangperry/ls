@@ -3,8 +3,8 @@ function longestSentence(text) {
   var wordCounts;
   var maxLength;
 
-  sentences = text.split(/[?.!]/).map(function(sentence) {
-    return sentence.trim();
+  sentences = text.match(/\b[^.!?]*[.!?]/g).map(function(sentence) {
+    return sentence.trim() ;
   });
 
   wordCounts = sentences.map(function(sentence) {
